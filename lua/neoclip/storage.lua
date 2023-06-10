@@ -46,6 +46,15 @@ M.get = function()
     return M.as_tbl({reversed = true})
 end
 
+M.get_index = function(index)
+    pre_get()
+    return storage.yanks:values(opts)
+end
+
+M.get_tail = function ()
+	return storage.yanks.ll.tail
+end
+
 M.insert = function(contents, typ)
     storage[typ]:insert(contents)
     post_change()

@@ -24,6 +24,34 @@ local function setup_auto_command()
     vim.cmd(table.concat(commands, '\n'))
 end
 
+
+
+local function setup_keymap()
+		local is_cycling = false;
+		local ring_node = nil;
+		local cycle_group = vim.api.nvim_create_augroup("NeoclipAugroup", { clear = true })
+		vim.keymap.set({"n"}, "<Plug>(NeoclipYankForward)", function ()
+				vim.schedule(function ()
+						local handlers = require('neoclip.handlers')
+						handlers.set_registers({'"'}, ring_node.value)
+						handlers.paste(ring_node.value, "p")
+				end)
+				if not is_cycling then
+						ring_node = require('neoclip.storage').get_tail()
+						is_cycling = true
+						vim.schedule(function ()
+								vim.api.nvim_create_autocmd({"CursorMoved"}, { buffer = 0, desc = "", group = cycle_group , callback = function ()
+									is_cycling = false
+										vim.print"Moved"
+								end, once = true })
+						end)
+				else
+						ring_node = ring_node.prev
+						vim.cmd(":normal! u")
+				end
+		end)
+end
+
 M.stop = function()
     M.stopped = true
 end
@@ -51,6 +79,7 @@ end
 M.setup = function(opts)
     settings.setup(opts)
     setup_auto_command()
+		setup_keymap()
 end
 
 return M

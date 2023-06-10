@@ -77,6 +77,11 @@ local values = function(self, opts)
     return self.ll:values(opts)
 end
 
+--- returns the 
+local get_index = function(self, index, opts)
+    return self.ll:values(opts)
+end
+
 --- number of entries in the set
 local len = function(self)
     return self.ll:len()

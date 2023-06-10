@@ -1,6 +1,6 @@
-vim.o.runtimepath = vim.o.runtimepath .. ',./rtps/plenary.nvim'
-vim.o.runtimepath = vim.o.runtimepath .. ',./rtps/telescope.nvim'
-vim.o.runtimepath = vim.o.runtimepath .. ',./rtps/sqlite.lua'
+vim.o.runtimepath = vim.o.runtimepath .. ',/home/sidharta/.local/share/nvim/lazy/plenary.nvim'
+vim.o.runtimepath = vim.o.runtimepath .. ',/home/sidharta/.local/share/nvim/lazy/telescope.nvim'
+vim.o.runtimepath = vim.o.runtimepath .. ',/home/sidharta/.local/share/nvim/lazy/sqlite.lua'
 vim.o.runtimepath = vim.o.runtimepath .. ',.'
 
 _G.assert_equal_tables = function(tbl1, tbl2)
